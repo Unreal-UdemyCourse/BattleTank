@@ -24,4 +24,6 @@ private:
 	
 	ATank* GetPlayerTank() const;
 	
+	void AimAtPlayer();
+
 };

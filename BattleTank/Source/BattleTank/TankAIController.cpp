@@ -11,6 +11,7 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	AimAtPlayer();
 }
 
 ATank* ATankAIController::GetControlledTank() const
@@ -21,4 +22,15 @@ ATank* ATankAIController::GetControlledTank() const
 ATank* ATankAIController::GetPlayerTank() const
 {
 	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+}
+
+void ATankAIController::AimAtPlayer()
+{
+	ATank* PlayerTank = GetPlayerTank();
+	if (PlayerTank == nullptr) { return; }
+
+	ATank* ControlledTank = GetControlledTank();
+	if (ControlledTank == nullptr) { return; }
+
+	ControlledTank->AimAt(PlayerTank->GetTargetLocation()); ///If there is a targeting problem consider using GetActorLocation()
 }
