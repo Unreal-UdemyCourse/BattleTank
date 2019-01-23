@@ -19,23 +19,6 @@ void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
 	Barrel = BarrelToSet;
 }
 
-// Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-// Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
@@ -51,27 +34,36 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		ActorsToIgnore.Add(OwningActor);
 	}
 
+
 	// Calculate the OutLaunchVelocity
-	if (UGameplayStatics::SuggestProjectileVelocity
-		(
-			this,
-			OutLaunchVelocity,
-			StartLocation,
-			HitLocation,
-			LaunchSpeed,
-			false,
-			0.0f,
-			0.0f,
-			ESuggestProjVelocityTraceOption::OnlyTraceWhileAscending,
-			FCollisionResponseParams::DefaultResponseParam,
-			TArray<AActor *>(ActorsToIgnore),
-			true
-		)
-	)
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
+	(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		HitLocation,
+		LaunchSpeed,
+		false,
+		0.0f,
+		0.0f,
+		ESuggestProjVelocityTraceOption::OnlyTraceWhileAscending,
+		FCollisionResponseParams::DefaultResponseParam,
+		TArray<AActor *>(ActorsToIgnore),
+		true
+	);
+
+	if(bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		//UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString())
+		MoveBarrelTowards(AimDirection);
 	}
-	UE_LOG(LogTemp, Warning, TEXT("HitLocation %s"), *HitLocation.ToString())
+
 }
 
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+	UE_LOG(LogTemp, Warning, TEXT("DeltaRotator : %s"), *DeltaRotator.ToString())
+}
