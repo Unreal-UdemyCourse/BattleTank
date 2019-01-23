@@ -49,17 +49,18 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
 		// line trace from end of barrel to the crosshair coordinates * distance.
+		// if we hit something
 		if (GetLookVectorHitLocation(LookDirection, HitLocation))
 		{
-			
+			// write the hit result's location vector to HitLocation
+			OutHitLocation = HitLocation;
+			return true;
 		}
+		else { return false; }
 	}
 
-	// if we hit something
-		// write the hit result's location vector to HitLocation
-		return true;
-	// else
-			//return false;
+	else { return false; }
+
 }
 
 // convert pixel location to a normal vector in world coordinates

@@ -2,9 +2,10 @@
 
 #pragma once
 
+#include "Kismet/GameplayStatics.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "TankAimingComponent.generated.h"
+#include "TankAimingComponent.generated.h" // place new includes above this
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -16,10 +17,12 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void AimAt(FVector HitLocation);
+	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 
 protected:
@@ -28,7 +31,7 @@ protected:
 
 private:	
 
-
+	UStaticMeshComponent* Barrel = nullptr;
 		
 	
 };
