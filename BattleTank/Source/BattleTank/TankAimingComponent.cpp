@@ -2,6 +2,10 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 155878451d76233b31a32416a84c94fc7ac65caf
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -65,6 +69,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
+<<<<<<< HEAD
 	
 	Barrel->Elevate(5); // TODO remove magic Number
+=======
+
+	Barrel->Elevate(5); // TODO remove magic number
+>>>>>>> 155878451d76233b31a32416a84c94fc7ac65caf
 }

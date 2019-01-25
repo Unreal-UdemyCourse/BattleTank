@@ -8,7 +8,11 @@
 #include "Tank.generated.h" // put new includes above
 
 
+<<<<<<< .merge_file_a04564
 class UTankBarrel;
+=======
+class UTankBarrel; // Forward Declaration
+>>>>>>> .merge_file_a11720
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
