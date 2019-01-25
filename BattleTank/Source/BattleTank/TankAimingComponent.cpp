@@ -2,17 +2,14 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
-<<<<<<< HEAD
-=======
 
->>>>>>> 155878451d76233b31a32416a84c94fc7ac65caf
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true; /// TODO should this tick?
 
 	// ...
 }
@@ -69,11 +66,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-<<<<<<< HEAD
-	
-	Barrel->Elevate(5); // TODO remove magic Number
-=======
+
 
 	Barrel->Elevate(5); // TODO remove magic number
->>>>>>> 155878451d76233b31a32416a84c94fc7ac65caf
 }
