@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -8,9 +8,7 @@
 #include "Public/CollisionQueryParams.h"
 #include "TankPlayerController.generated.h" // must be the last include
 
-/**
- * 
- */
+
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
