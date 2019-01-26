@@ -18,7 +18,7 @@ public:
 private:
 	UPROPERTY(EditAnywhere, Category = "Setup")
 		// Speed at which we change pitch of the barrel
-		float MaxDegreesPerSecond = 20.f;
+		float MaxDegreesPerSecond = 10.f;
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 		//Degrees
