@@ -16,5 +16,4 @@ void UTankTurret::Rotate(float RelativeSpeed)
 	SetRelativeRotation(FRotator(0.f, RawNewYawRotation, 0.f));
 
 	float TimeSeconds = GetWorld()->TimeSeconds;
-	UE_LOG(LogTemp, Warning, TEXT("%f: TankTurret.Rotate(%f). RawNewYawRotation = %f"), TimeSeconds, RelativeSpeed, RawNewYawRotation)
 }

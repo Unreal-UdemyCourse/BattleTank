@@ -48,4 +48,7 @@ private:
 	UTankBarrel* Barrel = nullptr; //TODO Do I need this?
 	
 	UTankTurret* Turret = nullptr;//TODO Do I need this?
+
+	UFUNCTION(BlueprintCallable)
+	void	Fire();
 };
