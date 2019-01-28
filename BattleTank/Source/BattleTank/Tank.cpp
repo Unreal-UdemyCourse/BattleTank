@@ -30,8 +30,9 @@ void ATank::Fire()
 	//Spawn a projectile at the socket location on the barrel
 	FVector SpawnLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	FRotator SpawnRotation = Barrel->GetSocketRotation(FName("Projectile"));
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SpawnLocation, SpawnRotation);
-	UE_LOG(LogTemp, Warning, TEXT("Firing!"))
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SpawnLocation, SpawnRotation);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
 // Called to bind functionality to input
