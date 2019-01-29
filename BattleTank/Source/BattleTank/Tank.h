@@ -36,6 +36,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed = 100000.f;  // TODO Find sensible default
 
+	UFUNCTION(BlueprintCallable)
+	void	Fire();
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -50,10 +53,9 @@ private:
 	
 	UTankTurret* Turret = nullptr;//TODO Do I need this?
 
-	UFUNCTION(BlueprintCallable)
-	void	Fire();
-
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+	float ReloadTimeInSeconds = 3.f; 
+	float LastFireTime = 0.f;
 };

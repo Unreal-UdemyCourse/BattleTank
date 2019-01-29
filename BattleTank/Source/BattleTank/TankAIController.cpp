@@ -12,7 +12,11 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
+	if (GetPlayerTank() == nullptr) { return; }
+
 	AimAtPlayer();
+	GetControlledTank()->Fire();
 }
 
 ATank* ATankAIController::GetControlledTank() const

@@ -25,14 +25,17 @@ void ATank::BeginPlay()
 
 void ATank::Fire()
 {
-	if (Barrel == nullptr) { return; }
+	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime > ReloadTimeInSeconds);
+	if (Barrel != nullptr && bIsReloaded)
+	{
+		//Spawn a projectile at the socket location on the barrel
+		FVector SpawnLocation = Barrel->GetSocketLocation(FName("Projectile"));
+		FRotator SpawnRotation = Barrel->GetSocketRotation(FName("Projectile"));
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SpawnLocation, SpawnRotation);
 
-	//Spawn a projectile at the socket location on the barrel
-	FVector SpawnLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	FRotator SpawnRotation = Barrel->GetSocketRotation(FName("Projectile"));
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, SpawnLocation, SpawnRotation);
-
-	Projectile->LaunchProjectile(LaunchSpeed);
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
 
 // Called to bind functionality to input
