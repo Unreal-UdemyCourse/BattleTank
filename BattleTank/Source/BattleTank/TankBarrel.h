@@ -16,15 +16,15 @@ public:
 	void Elevate(float RelativeSpeed);
 	
 private:
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		// Speed at which we change pitch of the barrel
 		float MaxDegreesPerSecond = 10.f;
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		//Degrees
 		float MaxElevation = 20.f; 
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		//Degrees
 		float MinElevation = 0.f; //Degrees
 };

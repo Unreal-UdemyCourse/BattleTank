@@ -33,11 +33,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void SetTurretReference(UTankTurret* TurretToSet);
 
-	UPROPERTY(EditAnywhere, Category = "Firing")
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 100000.f;  // TODO Find sensible default
 
 	UFUNCTION(BlueprintCallable)
 	void	Fire();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTimeInSeconds = 3.f;
+
+	float LastFireTime = 0.f;
 
 
 protected:
@@ -53,9 +58,6 @@ private:
 	
 	UTankTurret* Turret = nullptr;//TODO Do I need this?
 
-	UPROPERTY(EditAnywhere, Category = "Setup")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	float ReloadTimeInSeconds = 3.f; 
-	float LastFireTime = 0.f;
 };
