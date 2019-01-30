@@ -8,10 +8,6 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	if (!GetControlledTank())
-	{
-		UE_LOG(LogTemp, Error, TEXT("Player controller not controlling Tank"))
-	}
 }
 
 void ATankPlayerController::Tick(float DeltaSeconds)
