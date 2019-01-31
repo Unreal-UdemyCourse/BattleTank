@@ -4,9 +4,6 @@
 #include "TankTrack.h"
 
 
-
-
-
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
 	if (CheckTrackPointers())
@@ -22,7 +19,6 @@ void UTankMovementComponent::IntendMoveRight(float Throw)
 	{
 		LeftTrack->SetThrottle(Throw);
 		RightTrack->SetThrottle(-Throw);
-		UE_LOG(LogTemp, Warning, TEXT("Throttle at %f"), Throw)
 	}
 }
 
@@ -37,4 +33,13 @@ bool UTankMovementComponent::CheckTrackPointers()
 	// Handle null pointer
 	if (LeftTrack == nullptr || RightTrack == nullptr) { return false; }
 	else { return true; }
+}
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	FVector TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	FVector AIForwardIntention = MoveVelocity.GetSafeNormal();
+
+	float throttle = FVector::DotProduct(TankForward, AIForwardIntention);
+	IntendMoveForward(throttle);
 }

@@ -25,4 +25,6 @@ private:
 	
 	void AimAtPlayer();
 
+	//How close can the AI tank get
+	float AcceptanceRadius = 3000;
 };

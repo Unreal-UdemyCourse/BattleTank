@@ -30,6 +30,8 @@ public:
 	//Check tank tracks for null pointer
 	bool CheckTrackPointers();
 
+	// TODO Check best protection of this method
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 private:
 	UTankTrack*  LeftTrack = nullptr;

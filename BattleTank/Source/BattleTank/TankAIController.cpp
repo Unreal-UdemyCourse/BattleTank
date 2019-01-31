@@ -13,10 +13,15 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	if (GetPlayerTank() == nullptr) { return; }
+	ATank* PlayerTank = GetPlayerTank();
+	if (PlayerTank == nullptr) { return; }
+	MoveToActor(PlayerTank, AcceptanceRadius); // TODO check acceptance radius is in cm
 
 	AimAtPlayer();
-	GetControlledTank()->Fire();
+
+	ATank* ControlledTank = GetControlledTank();
+	if (ControlledTank == nullptr) { return; }
+	ControlledTank->Fire();
 }
 
 ATank* ATankAIController::GetControlledTank() const
