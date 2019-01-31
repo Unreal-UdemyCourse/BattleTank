@@ -20,6 +20,10 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;
+
 private:
 	// # TODO ask the player UI widget for this
 	UPROPERTY(EditDefaultsOnly)
@@ -30,8 +34,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000.f; // 10km
-
-	ATank* GetControlledTank() const;
 
 	//Move the barrel so the shot will hit where crosshair intersects with the world
 	void AimTowardsCrosshair();

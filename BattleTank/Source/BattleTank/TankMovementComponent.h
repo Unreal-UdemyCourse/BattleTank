@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Mad Science Game Studio
 
 #pragma once
 
@@ -30,10 +30,9 @@ public:
 	//Check tank tracks for null pointer
 	bool CheckTrackPointers();
 
-	// TODO Check best protection of this method
-	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
-
 private:
 	UTankTrack*  LeftTrack = nullptr;
 	UTankTrack*  RightTrack = nullptr;
+
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 };

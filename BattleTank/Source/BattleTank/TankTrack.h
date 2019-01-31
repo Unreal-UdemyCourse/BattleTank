@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Mad Science Game Studio
 
 #pragma once
 
@@ -19,5 +19,5 @@ public:
 	
 	//kg * cm / s^2
 	UPROPERTY(EditDefaultsOnly)
-		float TrackMaxDrivingForce = 40000000;
+		float TrackMaxDrivingForce = 20000000;
 };

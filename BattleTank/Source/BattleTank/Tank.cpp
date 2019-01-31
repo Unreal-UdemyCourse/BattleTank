@@ -1,4 +1,4 @@
-/// Fill out your copyright notice in the Description page of Project Settings.
+/// Copyright Mad Science Game Studio
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
