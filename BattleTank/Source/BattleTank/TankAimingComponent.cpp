@@ -5,6 +5,15 @@
 #include "TankTurret.h"
 
 
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+{
+	if (BarrelToSet == nullptr) { return; }
+	Barrel = BarrelToSet;
+
+	if (TurretToSet == nullptr) { return; }
+	Turret = TurretToSet;
+}
+
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -16,18 +25,18 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
-{
-	if (BarrelToSet == nullptr) { return; }
-	Barrel = BarrelToSet;
-}
+//void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
+//{
+//	if (BarrelToSet == nullptr) { return; }
+//	Barrel = BarrelToSet;
+//}
 
 
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-{
-	if (TurretToSet == nullptr) { return; }
-	Turret = TurretToSet;
-}
+//void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+//{
+//	if (TurretToSet == nullptr) { return; }
+//	Turret = TurretToSet;
+//}
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
