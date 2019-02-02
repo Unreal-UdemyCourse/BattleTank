@@ -9,7 +9,6 @@
 
 
 //Forward declarations
-class ATank;
 class UTankAimingComponent;
 
 UCLASS()
@@ -23,11 +22,11 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
+	// No Implematation in cpp for a BlueprintImplimentableEvent
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
+
+	UTankAimingComponent* AimingComponent = nullptr;
 
 private:
 	// # TODO ask the player UI widget for this

@@ -1,46 +1,37 @@
 /// Copyright Mad Science Game Studio
 
 #include "TankAIController.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	ATank* PlayerTank = GetPlayerTank();
+	APawn*PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (!ensure(PlayerTank)) { return; }
 	MoveToActor(PlayerTank, AcceptanceRadius); // TODO check acceptance radius is in cm
 
 	AimAtPlayer();
 
-	ATank* ControlledTank = GetControlledTank();
-	if (!ensure(ControlledTank)) { return; }
-	ControlledTank->Fire();
-}
-
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-ATank* ATankAIController::GetPlayerTank() const
-{
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	if (!ensure(AimingComponent)) { return; }
+	AimingComponent->Fire();
 }
 
 void ATankAIController::AimAtPlayer()
 {
-	ATank* PlayerTank = GetPlayerTank();
+	APawn* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (!ensure(PlayerTank)) { return; }
 
-	ATank* ControlledTank = GetControlledTank();
-	if (!ensure(ControlledTank)) { return; }
+	if (!ensure(AimingComponent)) { return; }
 
-	ControlledTank->AimAt(PlayerTank->GetTargetLocation()); ///If there is a targeting problem consider using GetActorLocation()
+	AimingComponent->AimAt(PlayerTank->GetTargetLocation()); ///If there is a targeting problem consider using GetActorLocation()
 }
