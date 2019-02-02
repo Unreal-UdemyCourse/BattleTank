@@ -14,13 +14,13 @@ void ATankAIController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	ATank* PlayerTank = GetPlayerTank();
-	if (PlayerTank == nullptr) { return; }
+	if (!ensure(PlayerTank)) { return; }
 	MoveToActor(PlayerTank, AcceptanceRadius); // TODO check acceptance radius is in cm
 
 	AimAtPlayer();
 
 	ATank* ControlledTank = GetControlledTank();
-	if (ControlledTank == nullptr) { return; }
+	if (!ensure(ControlledTank)) { return; }
 	ControlledTank->Fire();
 }
 
@@ -37,10 +37,10 @@ ATank* ATankAIController::GetPlayerTank() const
 void ATankAIController::AimAtPlayer()
 {
 	ATank* PlayerTank = GetPlayerTank();
-	if (PlayerTank == nullptr) { return; }
+	if (!ensure(PlayerTank)) { return; }
 
 	ATank* ControlledTank = GetControlledTank();
-	if (ControlledTank == nullptr) { return; }
+	if (!ensure(ControlledTank)) { return; }
 
 	ControlledTank->AimAt(PlayerTank->GetTargetLocation()); ///If there is a targeting problem consider using GetActorLocation()
 }

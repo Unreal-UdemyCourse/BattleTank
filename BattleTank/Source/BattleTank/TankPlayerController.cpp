@@ -2,12 +2,18 @@
 
 #include "TankPlayerController.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 
 
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UTankAimingComponent* AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)){ return; }
+
+	FoundAimingComponent(AimingComponent);
 }
 
 void ATankPlayerController::Tick(float DeltaSeconds)
@@ -24,7 +30,7 @@ ATank* ATankPlayerController::GetControlledTank() const
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	ATank* ControlledTank = GetControlledTank();
-	if (ControlledTank == nullptr) { return; }
+	if (!ensure(ControlledTank)) { return; }
 
 	FVector HitLocation; // OUT PARAMETER
 	if (GetSightRayHitLocation(HitLocation))
@@ -70,7 +76,7 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
 {
 	UWorld* World = GetWorld();
-	if(World == nullptr) { return false; }
+	if(!ensure(World)) { return false; }
 
 	FHitResult HitResult;
 	FVector StartLocation = PlayerCameraManager->GetCameraLocation();

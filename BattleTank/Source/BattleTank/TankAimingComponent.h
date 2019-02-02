@@ -20,6 +20,8 @@ enum class EFiringStatus : uint8
 // Forward Declarations
 class UTankBarrel; 
 class UTankTurret;
+class UTankAimingComponent;
+class AProjectile;
 
 //Holds Parameters and methods for Barrel's and Turrets
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -40,7 +42,7 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringStatus AimingState = EFiringStatus::Reloading;
+	EFiringStatus AimingState = EFiringStatus::Aiming;
 
 private:	
 

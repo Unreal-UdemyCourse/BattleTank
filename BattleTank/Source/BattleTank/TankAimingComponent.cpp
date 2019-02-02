@@ -7,10 +7,10 @@
 
 void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
-	if (BarrelToSet == nullptr) { return; }
+	if (!ensure(BarrelToSet)) { return; }
 	Barrel = BarrelToSet;
 
-	if (TurretToSet == nullptr) { return; }
+	if (!ensure(TurretToSet)) { return; }
 	Turret = TurretToSet;
 }
 
@@ -24,30 +24,16 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-
-//void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
-//{
-//	if (BarrelToSet == nullptr) { return; }
-//	Barrel = BarrelToSet;
-//}
-
-
-//void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-//{
-//	if (TurretToSet == nullptr) { return; }
-//	Turret = TurretToSet;
-//}
-
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (Barrel == nullptr) { return; }
+	if (!ensure(Barrel)) { return; }
 
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	AActor* OwningActor = GetOwner();
 	TArray<AActor*> ActorsToIgnore = TArray<AActor*>();
 
-	if (OwningActor != nullptr)
+	if (ensure(OwningActor != nullptr))
 	{
 		ActorsToIgnore.Add(OwningActor);
 	}
@@ -80,10 +66,11 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	if (!ensure(Barrel) || !ensure(Turret)) { return; }
+
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-
 
 	Barrel->Elevate(DeltaRotator.Pitch);
 

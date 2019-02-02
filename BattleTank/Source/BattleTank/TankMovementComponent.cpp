@@ -31,7 +31,7 @@ void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* 
 bool UTankMovementComponent::CheckTrackPointers()
 {
 	// Handle null pointer
-	if (LeftTrack == nullptr || RightTrack == nullptr) { return false; }
+	if (!ensure(LeftTrack|| RightTrack)) { return false; }
 	else { return true; }
 }
 
